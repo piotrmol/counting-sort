@@ -15,14 +15,15 @@ function sort(array, ...keys) {
   const values = [];
 
   array.forEach(e => values.push(e[keys[0]]));
-  console.log(contingSort(values));
-}
-
-function contingSort(array) {
   let min;
   let max;
-  min = Math.min(...array);
-  max = Math.max(...array);
+  min = Math.min(...values);
+  max = Math.max(...values);
+  const property = keys[0];
+  console.log(contingSort(array, min, max, property));
+}
+
+function contingSort(array, min, max, property) {
   let i = min,
     j = 0,
     len = array.length,
@@ -33,12 +34,12 @@ function contingSort(array) {
   }
 
   for (i = 0; i < len; i++) {
-    count[array[i]] += 1;
+    count[array[i][property]] += 1;
   }
 
   for (i = min; i <= max; i++) {
     while (count[i] > 0) {
-      array[j] = i;
+      array[j][property] = i;
       j++;
       count[i]--;
     }
